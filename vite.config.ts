@@ -38,7 +38,10 @@ export default defineConfig({
 		cssCodeSplit: true,
 		rollupOptions: {
 			plugins: []
-		}
+		},
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
 	},
 	// server: {
 	// 	proxy: {

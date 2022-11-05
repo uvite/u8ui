@@ -21,7 +21,7 @@ import { Button, Checkbox, Form, Input, message, Modal, Select } from 'antd';
 import api from '@/api';
 import { formItemLayout } from '@/constant';
 import { getTenantId, getCookie } from '@/utils';
-//import './login.scss';
+import './login.scss';
 
 const { Option } = Select;
 

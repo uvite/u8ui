@@ -1,7 +1,7 @@
 import React, { FC, Suspense } from 'react'
 import { RouteProps } from 'react-router'
 import PrivateRoute from './privateRoute'
-//import SuspendFallbackLoading from '@/components/fallback-loading'
+import SuspendFallbackLoading from '@/components/fallback-loading'
 
 export interface WrapperRouteProps extends RouteProps {
 	/** document title id */
@@ -27,8 +27,7 @@ const WrapperRouteWithOutLayoutComponent: FC<WrapperRouteProps> = ({ titleId, au
 		document.title = titleId
 	}
 
-	return <Suspense  >{props.element}</Suspense>
-	//return <Suspense fallback={<SuspendFallbackLoading message="正在加载中" />}>{props.element}</Suspense>
+	return <Suspense fallback={<SuspendFallbackLoading message="正在加载中" />}>{props.element}</Suspense>
 }
 
 export { WrapperRouteComponent, WrapperRouteWithOutLayoutComponent }

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Navigate } from 'react-router-dom'
 import { RouteProps, useLocation } from 'react-router'
-///import Empty from '@/components/empty'
+import Empty from '@/components/empty'
 // import useStore from '@src/stores/user'
 
 const PrivateRoute: FC<RouteProps> = (props) => {
@@ -16,8 +16,8 @@ const PrivateRoute: FC<RouteProps> = (props) => {
 		) : (
 			props.element
 		)
-  ) : (<div></div>
-		// <Empty title="没有权限" description="您还没有登录，请先去登录" type="403" />
+	) : (
+		<Empty title="没有权限" description="您还没有登录，请先去登录" type="403" />
 	)
 }
 
