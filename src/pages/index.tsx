@@ -51,7 +51,7 @@ import './index.scss';
 
 const moInstance = create({
 	extensions,
-	defaultLocale: 'Taier-zh-CN',
+	defaultLocale: 'U8-zh-CN',
 });
 
 moInstance.onBeforeInit(() => {
@@ -127,11 +127,11 @@ export default connect(taskRenderService, ({ supportTaskList }: ITaskRenderState
 							<Breadcrumb.Item>
 								<a
 									onClick={() => {
-										history.push({
-											query: {
-												drawer: DRAWER_MENU_ENUM.PATCH,
+										history.push("/",
+											  {
+												 drawer: DRAWER_MENU_ENUM.PATCH,
 											},
-										});
+										 );
 									}}
 								>
 									补数据实例

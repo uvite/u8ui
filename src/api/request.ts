@@ -1,7 +1,13 @@
 export const BASE_URI = '/api';
 
 export default {
-	GET_RETAINDB_LIST: `${BASE_URI}/batchComponent/getAllDatabases`, // 获取可以对接项目的数据库表
+
+  GET_ALLASSEST: `${BASE_URI}/assest`, // 获取全部数据源
+  GET_ALLBOTS: `${BASE_URI}/bots`, // 获取全部数据源
+
+
+
+  GET_RETAINDB_LIST: `${BASE_URI}/batchComponent/getAllDatabases`, // 获取可以对接项目的数据库表
 	CONVERT_TO_HIVE_COLUMNS: `${BASE_URI}/batch/batchDataSource/convertToHiveColumns`, // 转换成hive类型的数据类型
 	LOGIN: `${BASE_URI}/user/login`, // 登陆
 	GET_TENANT_LIST: `${BASE_URI}/tenant/listTenant`, // 获取租户列表

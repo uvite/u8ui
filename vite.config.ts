@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import { viteMockServe } from 'vite-plugin-mock'
+import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
 	resolve: {
@@ -30,7 +31,8 @@ export default defineConfig({
 		viteMockServe({
 			mockPath: 'mock',
 			localEnabled: true
-		})
+		}),
+    svgr(),
 	],
 	build: {
 		target: 'es2015',

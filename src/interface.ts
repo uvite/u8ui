@@ -37,6 +37,7 @@ import type {
 	DIRTY_DATA_SAVE,
 	PythonVersionKind,
 } from './constant';
+import classNames from "_classnames@2.3.2@classnames";
 
 interface IUserProps {}
 
@@ -526,6 +527,85 @@ export interface IDataSourceProps {
 	schemaName: string;
 	status: number;
 	linkJson: string | null;
+}
+
+/**
+ * 数据源类型
+ */
+export interface IAessetProps {
+
+
+	id: string;
+  name: string;
+  base: string;
+  quote:string;
+
+}
+
+/**
+ * 机器人
+ */
+
+export interface IBotProps {
+
+
+	id: string;
+  name: string;
+  dataType: string;
+  dataVersion:string;
+  dataDesc:string;
+
+}
+
+
+export interface BotStats {
+  lastPrice: number,
+  startTime: Date,
+  symbol: string,
+  market:object,
+  postion:object,
+  numTrades: number;
+  profit: number;
+  unrealizedProfit: number;
+  netProfit: number,
+  grossProfit: number,
+  grossLoss: number,
+  averageCost: number,
+  buyVolume: number,
+  sellVolume: number,
+  feeInUSD: number,
+  baseAssetPosition: number,
+  currencyFees:object
+}
+
+export interface TradeStats {
+  symbol: string,
+  winningRatio: number,
+  numOfLossTrade: number,
+  numOfProfitTrade: number,
+  grossProfit: number,
+  grossLoss:  number,
+  profits: [],
+  losses: [],
+  largestProfitTrade: number,
+  largestLossTrade: number,
+  averageProfitTrade: number,
+  averageLossTrade: number,
+  profitFactor: number,
+  totalNetProfit: number,
+  maximumConsecutiveWins: number,
+  maximumConsecutiveLosses: number,
+  maximumConsecutiveProfit: number,
+  maximumConsecutiveLoss: number
+}
+
+
+export interface IPnlProps {
+
+
+	report: TradeStats;
+  stats:BotStats;
+
 }
 
 /**

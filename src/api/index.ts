@@ -1,8 +1,28 @@
 import http from './http';
 import req from './request';
 import { TASK_TYPE_ENUM } from '@/constant';
-
+const publicUrl="http://localhost:9999"
 export default {
+
+  //获取资产列表
+  getAllAsset(params: any) {
+    return http.get(req.GET_ALLASSEST, params);
+  },
+  //获取机器人
+  getAllBots(params: any) {
+    return http.get(req.GET_ALLBOTS, params);
+  },
+
+  getTrade(params: any){
+    return http.get(`${publicUrl}/api/trades`,params);
+  },
+  getReport(params: any){
+    // api/sessions/binance/pnl?exchange=binance&symbol=ETHUSDT
+    return http.get(`${publicUrl}/api/report`,params);
+
+  },
+
+
 	// 获取节点下拉
 	getNodeAddressSelect(params?: any) {
 		return http.post(req.GET_NODEADDRESS_SELECT, params);

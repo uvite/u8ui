@@ -27,14 +27,15 @@ import {
 	FUNCTOIN_ACTIONS,
 } from '@/constant';
 import EditorEntry from '@/components/editorEntry';
-import ResourceManager from '@/pages/resource';
+import KlineManager from '@/pages/kline';
+import BotManager from '@/pages/bots';
 import {createBrowserHistory } from "history"
 const history = createBrowserHistory();
 import classNames from 'classnames';
 import FunctionManager from '@/pages/function';
 import type { UniqueId } from '@dtinsight/molecule/esm/common/types';
 import DataSource from '@/pages/dataSource';
-import type { IActivityMenuItemProps, IExtension } from '@dtinsight/molecule/esm/model';
+import type { IActivityMenuItemProps, IExtension,IMenuBarItem } from '@dtinsight/molecule/esm/model';
 import { Float } from '@dtinsight/molecule/esm/model';
 import { ColorThemeMode } from '@dtinsight/molecule/esm/model';
 import LogEditor from '@/components/logEditor';
@@ -44,7 +45,13 @@ import functionManagerService from '@/services/functionManagerService';
 import { showLoginModal } from '@/pages/login';
 import { getCookie, deleteCookie } from '@/utils';
 import { Button, message } from 'antd';
-import { Logo } from '@/components/icon';
+//import { Logo } from '@/components/icon';
+// import Logo from "@/assets/logo.svg";
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { ReactComponent as Logo } from "@/assets/logo.svg";
+
 import Language from '@/components/language';
 import AddTenantModal from '@/components/addTenantModal';
 
@@ -67,11 +74,12 @@ function removeStyles() {
 
 export default class InitializeExtension implements IExtension {
 	id: UniqueId = 'initialize';
-	name: string = 'initialize';
+	name= 'initialize';
 	activate(): void {
 		initializeColorTheme();
 		initializeEntry();
-		initResourceManager();
+		//initResourceManager();
+		initKlineManager();
 		initFunctionManager();
 		initializePane();
 		// 默认不展示 Panel
@@ -79,7 +87,8 @@ export default class InitializeExtension implements IExtension {
 		initMenuBar();
 		initLogin();
 		initExplorer();
-		initDataSource();
+		initBotsSource();
+		//initDataSource();
 		initLanguage();
 		initExpandCollapse();
 	}
@@ -134,10 +143,10 @@ function initializeEntry() {
 	molecule.editor.setEntry(<EditorEntry />);
 
 	const handleGoto = (url: string) => {
-		history.push({
-			query: {
+		history.push("/login",{
+
 				drawer: url,
-			},
+
 		});
 	};
 
@@ -208,42 +217,6 @@ function initializeEntry() {
 	);
 }
 
-/**
- * 初始化资源管理界面
- */
-function initResourceManager() {
-	const resourceManager = {
-		id: 'ResourceManager',
-		icon: 'package',
-		name: '资源管理',
-		title: '资源管理',
-	};
-
-	const headerToolBar: any[] = [
-		{
-			id: 'refresh',
-			title: '刷新',
-			icon: 'refresh',
-		},
-		{
-			id: 'menus',
-			title: '更多操作',
-			icon: 'menu',
-			contextMenu: [
-				RESOURCE_ACTIONS.UPLOAD,
-				RESOURCE_ACTIONS.REPLACE,
-				RESOURCE_ACTIONS.CREATE,
-			],
-		},
-	];
-
-	molecule.activityBar.add(resourceManager);
-	molecule.sidebar.add({
-		id: resourceManager.id,
-		title: resourceManager.name,
-		render: () => <ResourceManager panel={resourceManager} headerToolBar={headerToolBar} />,
-	});
-}
 
 /**
  * 初始化函数管理界面
@@ -252,8 +225,8 @@ function initFunctionManager() {
 	const functionManager = {
 		id: 'FunctionManager',
 		icon: 'variable-group',
-		name: '函数管理',
-		title: '函数管理',
+		name: '策略开发',
+		title: '策略开发',
 	};
 	const { CONTEXT_MENU_SEARCH } = molecule.builtin.getConstants();
 
@@ -294,6 +267,13 @@ function initializePane() {
 	molecule.panel.setActive(ID_COLLECTIONS.OUTPUT_LOG_ID);
 }
 
+
+
+export const vscodeMenuItem: IMenuBarItem = {
+  id: 'menu.vscode',
+  name: '关于',
+  icon: '',
+}
 /**
  * 初始化 MenuBar
  */
@@ -303,22 +283,28 @@ function initMenuBar() {
 	});
 	molecule.layout.setMenuBarMode('horizontal');
 	const state = molecule.menuBar.getState();
-	const nextData = state.data.concat();
+	const nextData =[];
+
 	nextData.splice(1, 0, {
 		id: 'operation',
-		name: '运维中心',
+		name: '策略中心',
 		data: [...OPERATIONS],
 	});
-	nextData.splice(2, 0, {
-		id: 'console',
-		name: '控制台',
-		data: [...CONSOLE],
-	});
-	const menuRunning = nextData.findIndex((menu) => menu.id === 'Run');
-	if (menuRunning > -1) {
-		nextData.splice(menuRunning, 1);
-	}
-	molecule.menuBar.setState({
+  nextData.push(vscodeMenuItem)
+	// nextData.splice(2, 0, {
+	// 	id: 'console',
+	// 	name: '控制台',
+	// 	data: [...CONSOLE],
+	// });
+	// const menuRunning = nextData.findIndex((menu) => menu.id === 'Run');
+	// if (menuRunning > -1) {
+	// 	nextData.splice(menuRunning, 1);
+	// }
+  //console.log(nextData)
+  //molecule.menuBar.remove('menu.file');
+  //molecule.menuBar.setMenus([]);
+
+  molecule.menuBar.setState({
 		data: nextData,
 	});
 }
@@ -438,25 +424,70 @@ function initExplorer() {
 	});
 }
 
+
 /**
  * 初始化数据源
  */
-function initDataSource() {
-	const dataSource = {
-		id: 'dataSource',
-		sortIndex: -1,
-		icon: 'database',
-		name: '数据源',
-		title: '数据源',
-	};
+function initBotsSource() {
+  const dataSource = {
+    id: 'botRun',
+    sortIndex: -1,
+    icon: 'vm-running',
+    name: '实盘策略',
+    title: '实盘策略',
+  };
 
-	molecule.activityBar.add(dataSource);
-	molecule.sidebar.add({
-		id: dataSource.id,
-		title: dataSource.name,
-		render: () => <DataSource />,
-	});
+  molecule.activityBar.add(dataSource);
+  molecule.sidebar.add({
+    id: dataSource.id,
+    title: dataSource.name,
+    render: () => <BotManager />,
+  });
 }
+
+/**
+ * 初始化行情
+ */
+function initKlineManager() {
+  const klineManager = {
+    id: 'KlineManager',
+    icon: 'graph-line',
+    sortIndex:-2,
+    name: '实时行情',
+    title: '实时行情',
+  };
+
+
+  molecule.activityBar.add(klineManager,true);
+  molecule.sidebar.add({
+  	id: klineManager.id,
+  	title: klineManager.name,
+  	render: () => <KlineManager />,
+  });
+  molecule.sidebar.setState({
+    current: klineManager.id
+  });
+ // openTradeView()
+}
+/**
+ * 初始化数据源
+ */
+// function initDataSource() {
+// 	const dataSource = {
+// 		id: 'dataSource',
+// 		sortIndex: -2,
+// 		icon: 'database',
+// 		name: '数据源',
+// 		title: '数据源',
+// 	};
+//
+// 	molecule.activityBar.add(dataSource);
+// 	// molecule.sidebar.add({
+// 	// 	id: dataSource.id,
+// 	// 	title: dataSource.name,
+// 	// 	render: () => <DataSource />,
+// 	// });
+// }
 
 /**
  * 初始化状态栏语言

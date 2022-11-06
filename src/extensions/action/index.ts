@@ -6,11 +6,15 @@ import QuickSaveTaskAction from './quickSaveTaskAction';
 
 export default class ActionExtensions implements IExtension {
 	id: UniqueId = 'actions';
-	name: string = 'actions';
+	name = 'actions';
 	activate(extensionCtx: IExtensionService): void {
 		extensionCtx.registerAction(QuickRunSQLAction);
 		extensionCtx.registerAction(QuickSaveTaskAction);
-	}
+
+    // molecule.activityBar.remove('sidebar.explore.title');
+    // molecule.activityBar.remove('sidebar.search.title');
+
+  }
 	dispose(): void {
 		throw new Error('Method not implemented.');
 	}
