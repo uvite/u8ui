@@ -237,7 +237,7 @@ export default function GoOnTask({ visible, data, onOk, onCancel }: IProps) {
 	return (
 		<Modal
 			title="续跑任务"
-			visible={visible}
+			open={visible}
 			okText="确认"
 			onCancel={onCancel}
 			onOk={doGoOn}

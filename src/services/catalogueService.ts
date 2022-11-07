@@ -272,7 +272,7 @@ export default class CatalogueService extends GlobalEvent implements ICatalogueS
 					)!;
 
 					taskNode.fileType = FileTypes.RootFolder;
-					molecule.folderTree.add(taskNode);
+					//molecule.folderTree.add(taskNode);
 
 					// 获取当前根目录的下级目录，确保打开 Explorer 有数据展示
 					this.loadTreeNode(taskRootFolder, CATALOGUE_TYPE.TASK);

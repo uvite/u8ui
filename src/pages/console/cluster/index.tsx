@@ -153,7 +153,7 @@ export default function ClusterManage() {
 			/>
 			<AddEngineModal
 				title="新增集群"
-				visible={modalVisible}
+				open={modalVisible}
 				onCancel={onCancel}
 				onOk={onSubmit}
 			/>

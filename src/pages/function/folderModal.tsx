@@ -188,7 +188,7 @@ export default function FolderModal({
 			<Modal
 				destroyOnClose
 				title={!isCreate ? '编辑文件夹' : '新建文件夹'}
-				visible={isModalShow}
+				open={isModalShow}
 				key={dtcount}
 				footer={[
 					<Button key="back" size="large" onClick={handleCancel}>

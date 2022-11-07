@@ -7,7 +7,7 @@ import { formItemLayout, TASK_TYPE_ENUM } from '@/constant';
 import context from '@/context';
 import classNames from 'classnames';
 import ReactDOMServer from 'react-dom/server';
-import { taskRenderService } from '@/services';
+//import { taskRenderService } from '@/services';
 // import MxGraphContainer, { WIDGETS_PREFIX } from '@/components/mxGraph/container';
 import molecule from '@dtinsight/molecule';
 import { connect } from '@dtinsight/molecule/esm/react';
@@ -221,14 +221,14 @@ function Workflow({ current }: molecule.model.IEditor) {
 	const handleDoubleClick = (data: IWorkflowData) => {
 		if (!isInEdit.current) {
 			setLoading(true);
-			taskRenderService.openTask(
-				{ ...data },
-				{
-					// workflow task don't need to getTaskById again
-					// since already request getTaskById for each vertex in workflow's useEffect
-					create: data.id.toString().startsWith('workflow__'),
-				},
-			);
+			// taskRenderService.openTask(
+			// 	{ ...data },
+			// 	{
+			// 		// workflow task don't need to getTaskById again
+			// 		// since already request getTaskById for each vertex in workflow's useEffect
+			// 		create: data.id.toString().startsWith('workflow__'),
+			// 	},
+			// );
 		}
 	};
 

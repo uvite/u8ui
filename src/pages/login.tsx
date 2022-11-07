@@ -266,7 +266,7 @@ export default () => {
 		<Modal
 			className="dt-login"
 			title={isLogin ? '请选择租户' : '欢迎登录 '}
-			visible={isModalVisible}
+			open={isModalVisible}
 			footer={null}
 			destroyOnClose
 			onCancel={handleCancel}

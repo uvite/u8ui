@@ -50,7 +50,7 @@ export default function EditorEntry() {
 
 	return (
 		<div className="entry">
-			<img className="logo" width={200} src="images/taier.png" />
+			<img className="logo" width={200} src="images/u8.svg" />
 			<div className="commands">
 				{keys.map((key) => (
 					<div className="command" key={key.id}>

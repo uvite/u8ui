@@ -6,6 +6,7 @@ import React from 'react';
 import {useRef} from 'react';
 import molecule from '@dtinsight/molecule';
 import styled from "styled-components";
+import './index.scss';
 
 import API from "../../api";
 
@@ -18,16 +19,20 @@ const CreateDataSource = styled.div`
 
 export class GridView extends React.Component {
 
-    state = {
-        data: [],
-        currentDataSource: undefined
-    }
+    // state = {
+    //     data: [],
+    //     currentDataSource: undefined
+    // }
 
     formRef: React.RefObject<HTMLElement>;
 
     constructor(props: any) {
         super(props);
         this.formRef = React.createRef();
+        this.state = {
+        data: [],
+        currentDataSource: undefined
+      }
     }
 
 
@@ -41,7 +46,7 @@ export class GridView extends React.Component {
               symbol:"ETHUSDT"
             }
             const res = await API.getTrade(params);
-
+            //alert(JSON.stringify(res.trades))
             this.setState({
                 data: res.trades || []
             });
@@ -51,10 +56,11 @@ export class GridView extends React.Component {
     }
     initGrid(){
         let container: HTMLElement | null;
+      // eslint-disable-next-line prefer-const
         container = this.formRef.current;
 
         const rows: RowData[] = this.state.data;
-
+        console.log(rows)
         // @ts-ignore
         const grid = new Grid( container, {
             rows:rows,
@@ -71,7 +77,7 @@ export class GridView extends React.Component {
     componentDidMount() {
         this.fetchData();
         console.log(this.state.data)
-        molecule.event.EventBus.subscribe('addDataSource', () => { this.reload() });
+        //molecule.event.EventBus.subscribe('addDataSource', () => { this.reload() });
 
 
     }
@@ -81,7 +87,7 @@ export class GridView extends React.Component {
     render() {
         return (
             <CreateDataSource className="dataSource__create">
-                 <div ref={this.formRef as React.RefObject<HTMLDivElement>} className="v-grid-default-theme aaa">
+                 <div ref={this.formRef as React.RefObject<HTMLDivElement>} className="v-grid-default-theme grid" >
 
                 </div>
 

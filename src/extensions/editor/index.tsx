@@ -36,7 +36,7 @@ import type { IParamsProps } from '@/services/taskParamsService';
 import taskParamsService from '@/services/taskParamsService';
 import ImportTemplate from '@/components/task/importTemplate';
 import { languages } from '@dtinsight/molecule/esm/monaco';
-import { editorActionBarService, taskRenderService, executeService } from '@/services';
+import { editorActionBarService, executeService } from '@/services';
 import notification from '@/components/notification';
 import { mappingTaskTypeToLanguage } from '@/utils/enums';
 import taskSaveService from '@/services/taskSaveService';
@@ -95,184 +95,184 @@ function emitEvent() {
 				break;
 			}
 
-			case ID_COLLECTIONS.TASK_OPS_ID: {
-				const currentTabData:
-					| (CatalogueDataProps & IOfflineTaskProps & { value?: string })
-					| undefined = current.tab?.data;
-				if (currentTabData) {
-					const computerType = taskRenderService
-						.getState()
-						.supportTaskList.find(
-							(t) => t.key === currentTabData.taskType,
-						)?.computeType;
-
-					if (computerType !== undefined) {
-						const targetDrawer =
-							computerType === IComputeType.STREAM
-								? DRAWER_MENU_ENUM.STREAM_TASK
-								: DRAWER_MENU_ENUM.TASK;
-
-						history.push({
-							query: {
-								drawer: targetDrawer,
-								tname: currentTabData.name,
-							},
-						});
-					} else {
-						notification.error({
-							key: 'WITHOUT_SUPPORT_TASK',
-							message: `当前不支持的任务类型，请查看是否支持任务类型为 ${currentTabData.taskType} 的任务`,
-						});
-					}
-				}
-				break;
-			}
-			case ID_COLLECTIONS.TASK_CONVERT_SCRIPT: {
-				const currentTabData:
-					| (CatalogueDataProps & IOfflineTaskProps & { value?: string })
-					| undefined = current.tab?.data;
-				if (currentTabData) {
-					Modal.confirm({
-						title: '转换为脚本',
-						content: (
-							<div>
-								<p style={{ color: '#f04134' }}>此操作不可逆，是否继续？</p>
-								<p>
-									当前为向导模式，配置简单快捷，脚本模式可灵活配置更多参数，定制化程度高
-								</p>
-							</div>
-						),
-						okText: '确认',
-						cancelText: '取消',
-						onOk() {
-							switch (currentTabData.taskType) {
-								case TASK_TYPE_ENUM.SYNC:
-									api.convertDataSyncToScriptMode({
-										id: currentTabData.id,
-									}).then((res) => {
-										if (res.code === 1) {
-											message.success('转换成功！');
-											api.getOfflineTaskByID({
-												id: currentTabData.id,
-											}).then((result) => {
-												if (result.code === 1) {
-													molecule.editor.updateTab({
-														id: result.data.id.toString(),
-														data: {
-															...currentTabData,
-															...result.data,
-															language: 'json',
-															value: prettierJSONstring(
-																result.data.sqlText,
-															),
-														},
-														renderPane: undefined,
-													});
-												}
-											});
-										}
-									});
-									break;
-								case TASK_TYPE_ENUM.DATA_ACQUISITION:
-								case TASK_TYPE_ENUM.SQL: {
-									api.convertToScriptMode({
-										id: currentTabData.id,
-										createModel: currentTabData.createModel,
-										componentVersion: currentTabData.componentVersion,
-									}).then((res) => {
-										if (res.code === 1) {
-											message.success('转换成功！');
-											// update current values
-											api.getOfflineTaskByID({
-												id: currentTabData.id,
-											}).then((result) => {
-												if (result.code === 1) {
-													if (
-														currentTabData.taskType ===
-														TASK_TYPE_ENUM.DATA_ACQUISITION
-													) {
-														const nextTabData = current.tab!;
-														nextTabData!.data = result.data;
-														Reflect.deleteProperty(
-															nextTabData,
-															'renderPane',
-														);
-														nextTabData.data.language =
-															mappingTaskTypeToLanguage(
-																result.data.taskType,
-															);
-														nextTabData.data.value =
-															result?.data?.sqlText;
-														molecule.editor.updateTab(nextTabData);
-														return;
-													}
-
-													const nextTabData = result.data;
-													molecule.editor.updateTab({
-														id: nextTabData.id.toString(),
-														data: {
-															...currentTabData,
-															...nextTabData,
-														},
-													});
-													// update the editor's value
-													molecule.editor.editorInstance
-														.getModel()
-														?.setValue(nextTabData.sqlText);
-													editorActionBarService.performSyncTaskActions();
-												}
-											});
-										}
-									});
-									break;
-								}
-								default:
-									break;
-							}
-						},
-					});
-				}
-				break;
-			}
-			case ID_COLLECTIONS.TASK_IMPORT_ID: {
-				const currentTab = current.tab;
-
-				const target = document.getElementById(CONTAINER_ID);
-				if (target) {
-					target.parentElement?.removeChild(target);
-				}
-				const node = document.createElement('div');
-				node.id = CONTAINER_ID;
-				document.getElementById('molecule')!.appendChild(node);
-
-				const root = createRoot(node);
-				if (currentTab) {
-					const handleSuccess = (data: string) => {
-						// update the editor's content
-						const prettierJSON = JSON.stringify(JSON.parse(data), null, 4);
-						molecule.editor.editorInstance.getModel()?.setValue(prettierJSON);
-					};
-
-					root.render(
-						<ImportTemplate taskId={currentTab.data.id} onSuccess={handleSuccess} />,
-					);
-				}
-				break;
-			}
-			// FlinkSQL 语法检查
-			case ID_COLLECTIONS.TASK_SYNTAX_ID: {
-				syntaxValidate(current);
-				break;
-			}
-			// FlinkSQL 格式化
-			case ID_COLLECTIONS.TASK_FORMAT_ID: {
-				api.sqlFormat({ sql: current.tab?.data.value }).then((res) => {
-					if (res.code === 1) {
-						molecule.editor.editorInstance.getModel()?.setValue(res.data);
-					}
-				});
-				break;
-			}
+			// case ID_COLLECTIONS.TASK_OPS_ID: {
+			// 	const currentTabData:
+			// 		| (CatalogueDataProps & IOfflineTaskProps & { value?: string })
+			// 		| undefined = current.tab?.data;
+			// 	if (currentTabData) {
+			// 		const computerType = taskRenderService
+			// 			.getState()
+			// 			.supportTaskList.find(
+			// 				(t) => t.key === currentTabData.taskType,
+			// 			)?.computeType;
+      //
+			// 		if (computerType !== undefined) {
+			// 			const targetDrawer =
+			// 				computerType === IComputeType.STREAM
+			// 					? DRAWER_MENU_ENUM.STREAM_TASK
+			// 					: DRAWER_MENU_ENUM.TASK;
+      //
+			// 			history.push("/",{
+			// 				query: {
+			// 					drawer: targetDrawer,
+			// 					tname: currentTabData.name,
+			// 				},
+			// 			});
+			// 		} else {
+			// 			notification.error({
+			// 				key: 'WITHOUT_SUPPORT_TASK',
+			// 				message: `当前不支持的任务类型，请查看是否支持任务类型为 ${currentTabData.taskType} 的任务`,
+			// 			});
+			// 		}
+			// 	}
+			// 	break;
+			// }
+			// case ID_COLLECTIONS.TASK_CONVERT_SCRIPT: {
+			// 	const currentTabData:
+			// 		| (CatalogueDataProps & IOfflineTaskProps & { value?: string })
+			// 		| undefined = current.tab?.data;
+			// 	if (currentTabData) {
+			// 		Modal.confirm({
+			// 			title: '转换为脚本',
+			// 			content: (
+			// 				<div>
+			// 					<p style={{ color: '#f04134' }}>此操作不可逆，是否继续？</p>
+			// 					<p>
+			// 						当前为向导模式，配置简单快捷，脚本模式可灵活配置更多参数，定制化程度高
+			// 					</p>
+			// 				</div>
+			// 			),
+			// 			okText: '确认',
+			// 			cancelText: '取消',
+			// 			onOk() {
+			// 				switch (currentTabData.taskType) {
+			// 					case TASK_TYPE_ENUM.SYNC:
+			// 						api.convertDataSyncToScriptMode({
+			// 							id: currentTabData.id,
+			// 						}).then((res) => {
+			// 							if (res.code === 1) {
+			// 								message.success('转换成功！');
+			// 								api.getOfflineTaskByID({
+			// 									id: currentTabData.id,
+			// 								}).then((result) => {
+			// 									if (result.code === 1) {
+			// 										molecule.editor.updateTab({
+			// 											id: result.data.id.toString(),
+			// 											data: {
+			// 												...currentTabData,
+			// 												...result.data,
+			// 												language: 'json',
+			// 												value: prettierJSONstring(
+			// 													result.data.sqlText,
+			// 												),
+			// 											},
+			// 											renderPane: undefined,
+			// 										});
+			// 									}
+			// 								});
+			// 							}
+			// 						});
+			// 						break;
+			// 					case TASK_TYPE_ENUM.DATA_ACQUISITION:
+			// 					case TASK_TYPE_ENUM.SQL: {
+			// 						api.convertToScriptMode({
+			// 							id: currentTabData.id,
+			// 							createModel: currentTabData.createModel,
+			// 							componentVersion: currentTabData.componentVersion,
+			// 						}).then((res) => {
+			// 							if (res.code === 1) {
+			// 								message.success('转换成功！');
+			// 								// update current values
+			// 								api.getOfflineTaskByID({
+			// 									id: currentTabData.id,
+			// 								}).then((result) => {
+			// 									if (result.code === 1) {
+			// 										if (
+			// 											currentTabData.taskType ===
+			// 											TASK_TYPE_ENUM.DATA_ACQUISITION
+			// 										) {
+			// 											const nextTabData = current.tab!;
+			// 											nextTabData!.data = result.data;
+			// 											Reflect.deleteProperty(
+			// 												nextTabData,
+			// 												'renderPane',
+			// 											);
+			// 											nextTabData.data.language =
+			// 												mappingTaskTypeToLanguage(
+			// 													result.data.taskType,
+			// 												);
+			// 											nextTabData.data.value =
+			// 												result?.data?.sqlText;
+			// 											molecule.editor.updateTab(nextTabData);
+			// 											return;
+			// 										}
+      //
+			// 										const nextTabData = result.data;
+			// 										molecule.editor.updateTab({
+			// 											id: nextTabData.id.toString(),
+			// 											data: {
+			// 												...currentTabData,
+			// 												...nextTabData,
+			// 											},
+			// 										});
+			// 										// update the editor's value
+			// 										molecule.editor.editorInstance
+			// 											.getModel()
+			// 											?.setValue(nextTabData.sqlText);
+			// 										editorActionBarService.performSyncTaskActions();
+			// 									}
+			// 								});
+			// 							}
+			// 						});
+			// 						break;
+			// 					}
+			// 					default:
+			// 						break;
+			// 				}
+			// 			},
+			// 		});
+			// 	}
+			// 	break;
+			// }
+			// case ID_COLLECTIONS.TASK_IMPORT_ID: {
+			// 	const currentTab = current.tab;
+      //
+			// 	const target = document.getElementById(CONTAINER_ID);
+			// 	if (target) {
+			// 		target.parentElement?.removeChild(target);
+			// 	}
+			// 	const node = document.createElement('div');
+			// 	node.id = CONTAINER_ID;
+			// 	document.getElementById('molecule')!.appendChild(node);
+      //
+			// 	const root = createRoot(node);
+			// 	if (currentTab) {
+			// 		const handleSuccess = (data: string) => {
+			// 			// update the editor's content
+			// 			const prettierJSON = JSON.stringify(JSON.parse(data), null, 4);
+			// 			molecule.editor.editorInstance.getModel()?.setValue(prettierJSON);
+			// 		};
+      //
+			// 		root.render(
+			// 			<ImportTemplate taskId={currentTab.data.id} onSuccess={handleSuccess} />,
+			// 		);
+			// 	}
+			// 	break;
+			// }
+			// // FlinkSQL 语法检查
+			// case ID_COLLECTIONS.TASK_SYNTAX_ID: {
+			// 	syntaxValidate(current);
+			// 	break;
+			// }
+			// // FlinkSQL 格式化
+			// case ID_COLLECTIONS.TASK_FORMAT_ID: {
+			// 	api.sqlFormat({ sql: current.tab?.data.value }).then((res) => {
+			// 		if (res.code === 1) {
+			// 			molecule.editor.editorInstance.getModel()?.setValue(res.data);
+			// 		}
+			// 	});
+			// 	break;
+			// }
 			default:
 				break;
 		}
@@ -282,7 +282,7 @@ function emitEvent() {
 const updateTaskVariables = debounce((tab: molecule.model.IEditorTab<any>) => {
 	// 不同的任务需要解析不同的字段来获取自定义参数
 	const currentData: IOfflineTaskProps & { value?: string } = tab.data;
-	let sqlText: string = '';
+	let sqlText = '';
 	switch (currentData.taskType) {
 		case TASK_TYPE_ENUM.SPARK_SQL:
 		case TASK_TYPE_ENUM.HIVE_SQL:
@@ -361,7 +361,7 @@ function registerCompletion() {
 
 export default class EditorExtension implements IExtension {
 	id: UniqueId = 'editor';
-	name: string = 'editor';
+	name = 'editor';
 	dispose(): void {
 		throw new Error('Method not implemented.');
 	}

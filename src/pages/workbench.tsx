@@ -29,7 +29,7 @@ import {
 } from '@dtinsight/molecule/esm/common/className';
 
 import { EditorView } from '@dtinsight/molecule/esm/workbench/editor';
-import { SidebarView } from '@dtinsight/molecule/esm/workbench/sidebar';
+import { SidebarView ,Sidebar} from '@dtinsight/molecule/esm/workbench/sidebar';
 import { MenuBarView } from '@dtinsight/molecule/esm/workbench/menuBar';
 import { ActivityBarView } from '@dtinsight/molecule/esm/workbench/activityBar';
 import { StatusBarView } from '@dtinsight/molecule/esm/workbench/statusBar';
@@ -48,7 +48,7 @@ import { Pane } from '@dtinsight/molecule/esm/components/split';
 import { Display } from '@dtinsight/molecule/esm/components';
 import molecule from '@dtinsight/molecule';
 import RightBar from './rightBar';
-
+import { MySidePane } from './mySidePane';
 const mainBenchClassName = prefixClaName('mainBench');
 const workbenchClassName = prefixClaName('workbench');
 const compositeBarClassName = prefixClaName('compositeBar');
@@ -122,7 +122,9 @@ export function WorkbenchView(props: IWorkbench & ILayout & ILayoutController) {
 					>
 						<Pane minSize={170} maxSize="80%">
 							<SidebarView />
-						</Pane>
+              {/*<Sidebar current={MySidePane.id} panes={[MySidePane]} />*/}
+
+            </Pane>
 						<SplitPane
 							sizes={getSizes()}
 							showSashes={!panel.hidden && !panel.panelMaximized}

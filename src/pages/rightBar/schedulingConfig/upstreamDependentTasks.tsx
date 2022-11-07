@@ -111,7 +111,7 @@ export default function UpstreamDependentTasks({
 	}, []);
 
 	return (
-		<Modal visible={visible} title="添加上游依赖任务" onOk={handleSubmit} onCancel={onCancel}>
+		<Modal open={visible} title="添加上游依赖任务" onOk={handleSubmit} onCancel={onCancel}>
 			<Form form={form}>
 				<FormItem
 					{...formItemLayout}

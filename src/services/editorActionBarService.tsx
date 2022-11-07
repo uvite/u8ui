@@ -5,7 +5,7 @@ import molecule from '@dtinsight/molecule';
 import editorActions from '@/components/scaffolds/editorActions';
 import { Component } from '@dtinsight/molecule/esm/react';
 import ExecuteService from './executeService';
-import { taskRenderService } from '.';
+//import { taskRenderService } from '.';
 import type { IExecuteService } from './executeService';
 import type { CatalogueDataProps, IOfflineTaskProps } from '@/interface';
 
@@ -81,13 +81,13 @@ export default class EditorActionBarService
 		const { current } = molecule.editor.getState();
 		if (current?.tab?.data) {
 			const currentTabData: CatalogueDataProps & IOfflineTaskProps = current?.tab?.data;
-			const taskToolbar = cloneDeep(
-				taskRenderService.renderEditorActions(currentTabData.taskType, currentTabData),
-			);
-
-			molecule.editor.updateGroup(current.id, {
-				actions: [...taskToolbar, ...molecule.editor.getDefaultActions()],
-			});
+			// const taskToolbar = cloneDeep(
+			// ///	taskRenderService.renderEditorActions(currentTabData.taskType, currentTabData),
+			// );
+      //
+			// molecule.editor.updateGroup(current.id, {
+			// 	actions: [...taskToolbar, ...molecule.editor.getDefaultActions()],
+			// });
 			if (this.state.runningTab.has(currentTabData.id)) {
 				molecule.editor.updateActions([
 					RUNNING_TASK,

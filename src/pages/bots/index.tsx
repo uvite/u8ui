@@ -40,7 +40,7 @@ import type {IDataSourceState} from '@/services/botService';
 import './index.scss';
 import TradeView from "@pages/tradingview/App";
 
-import GridView from './order';
+import GridView from './trades';
 import Report from "./report";
 import TradeVolume from "./tradeVolume";
 

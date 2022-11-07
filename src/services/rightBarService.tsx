@@ -1,7 +1,7 @@
 import React from 'react';
-import FlinkDimensionPanel from '@/pages/rightBar/flinkDimension';
-import FlinkResultPanel from '@/pages/rightBar/flinkResult';
-import FlinkSourcePanel from '@/pages/rightBar/flinkSource';
+// import FlinkDimensionPanel from '@/pages/rightBar/flinkDimension';
+// import FlinkResultPanel from '@/pages/rightBar/flinkResult';
+// import FlinkSourcePanel from '@/pages/rightBar/flinkSource';
 import EnvParams from '@/pages/rightBar/envParams';
 import SchedulingConfig from '@/pages/rightBar/schedulingConfig';
 import TaskInfo from '@/pages/rightBar/taskInfo';
@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import { useEffect } from 'react';
 import { singleton } from 'tsyringe';
 import { RightBarKind } from '@/interface';
-import { taskRenderService } from '.';
+//import { taskRenderService } from '.';
 import TaskConfig from '@/pages/rightBar/taskConfig';
 
 interface IRightBarService {
@@ -153,43 +153,43 @@ export default class RightBarService extends Component<IRightbarState> implement
 		 * 当前的 tab 是否不合法，如不合法则展示 Empty
 		 */
 		const isInValidTab = !isTaskTab(current?.tab?.id);
-
-		// 判断当前的 tab 是否支持该 kind
-		const supportBars = taskRenderService.renderRightBar();
-
-		const isSupportThisKind = supportBars.includes(kind);
-		if (!isSupportThisKind) {
-			// 不支持则重置 current
-			this.setCurrent(null);
-		}
-
-		if (isInValidTab || !isSupportThisKind) {
-			return (
-				<div className={classNames('text-center', 'mt-10px')}>
-					无法获取{this.getTextByKind(kind)}
-				</div>
-			);
-		}
-
-		switch (kind) {
-			case RightBarKind.TASK:
-				return <TaskInfo current={current} />;
-			case RightBarKind.DEPENDENCY:
-				return <SchedulingConfig current={current} />;
-			case RightBarKind.TASK_PARAMS:
-				return <TaskParams current={current} />;
-			case RightBarKind.ENV_PARAMS:
-				return <EnvParams current={current} />;
-			case RightBarKind.TASK_CONFIG:
-				return this.withForm(<TaskConfig key="config" current={current} />);
-			case RightBarKind.FLINKSQL_SOURCE:
-				return this.withForm(<FlinkSourcePanel key="source" current={current} />);
-			case RightBarKind.FLINKSQL_RESULT:
-				return this.withForm(<FlinkResultPanel key="result" current={current} />);
-			case RightBarKind.FLINKSQL_DIMENSION:
-				return this.withForm(<FlinkDimensionPanel key="dimension" current={current} />);
-			default:
-				return null;
-		}
-	};
+    return null
+	// 	// 判断当前的 tab 是否支持该 kind
+	// 	const supportBars = taskRenderService.renderRightBar();
+  //
+	// 	const isSupportThisKind = supportBars.includes(kind);
+	// 	if (!isSupportThisKind) {
+	// 		// 不支持则重置 current
+	// 		this.setCurrent(null);
+	// 	}
+  //
+	// 	if (isInValidTab || !isSupportThisKind) {
+	// 		return (
+	// 			<div className={classNames('text-center', 'mt-10px')}>
+	// 				无法获取{this.getTextByKind(kind)}
+	// 			</div>
+	// 		);
+	// 	}
+  //
+	// 	switch (kind) {
+	// 		case RightBarKind.TASK:
+	// 			return <TaskInfo current={current} />;
+	// 		case RightBarKind.DEPENDENCY:
+	// 			return <SchedulingConfig current={current} />;
+	// 		case RightBarKind.TASK_PARAMS:
+	// 			return <TaskParams current={current} />;
+	// 		case RightBarKind.ENV_PARAMS:
+	// 			return <EnvParams current={current} />;
+	// 		case RightBarKind.TASK_CONFIG:
+	// 			return this.withForm(<TaskConfig key="config" current={current} />);
+	// 		case RightBarKind.FLINKSQL_SOURCE:
+	// 			return this.withForm(<FlinkSourcePanel key="source" current={current} />);
+	// 		case RightBarKind.FLINKSQL_RESULT:
+	// 			return this.withForm(<FlinkResultPanel key="result" current={current} />);
+	// 		case RightBarKind.FLINKSQL_DIMENSION:
+	// 			return this.withForm(<FlinkDimensionPanel key="dimension" current={current} />);
+	// 		default:
+	// 			return null;
+	// 	}
+	 };
 }

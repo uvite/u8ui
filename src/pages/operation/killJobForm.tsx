@@ -149,7 +149,7 @@ export default ({ visible, onCancel, autoFresh }: IKillJobFormProps) => {
 		<Modal
 			title="按业务日期杀实例"
 			confirmLoading={submitLoading}
-			visible={visible}
+			open={visible}
 			width={650}
 			onOk={handleSubmit}
 			onCancel={handleCancel}

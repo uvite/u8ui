@@ -328,7 +328,7 @@ export default function KeyModal({
 	const text = editField?.value ? '格式' : '格式化';
 
 	return (
-		<Modal title={title} visible={visible} destroyOnClose onOk={handleSubmit} onCancel={handleCancel}>
+		<Modal title={title} open={visible} destroyOnClose onOk={handleSubmit} onCancel={handleCancel}>
 			<Form form={form} preserve={false} {...formItemLayout}>
 				{renderFormItems()}
 				{canFormat && isReader && (

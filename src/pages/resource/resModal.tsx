@@ -425,7 +425,7 @@ export default function ResModal({
 		<Modal
 			title={isCoverUpload ? '替换资源' : '上传资源'}
 			confirmLoading={confirmLoading}
-			visible={visible}
+			open={visible}
 			onCancel={onClose}
 			onOk={handleSubmit}
 			destroyOnClose

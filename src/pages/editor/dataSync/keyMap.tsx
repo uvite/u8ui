@@ -745,7 +745,7 @@ export default function KeyMap() {
 			</Spin>
 			<KeyModal
 				title={keyModalTitle}
-				visible={keyModal.visible}
+				open={keyModal.visible}
 				keyModal={keyModal}
 				dataType={keyModalType}
 				onOk={(values: IDataColumnsProps) => {

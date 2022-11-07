@@ -21,8 +21,8 @@ import InitializeExtension from './init';
 import CatalogueExtension from './catalogue';
 import PanelExtension from './panel';
 import EditorExtension from './editor';
-import FolderTreeExtension from './folderTree';
-import { ExtendsSparkSQL } from './languages';
+// import FolderTreeExtension from './folderTree';
+// import { ExtendsSparkSQL } from './languages';
 import MenuExtension from './menu';
 import DTStackTheme from './dtstackTheme';
 import { LocaleExtension } from './i18n';
@@ -36,9 +36,9 @@ export const extensions: IExtension[] = [
 	new ActionExtension(),
 	new InitializeExtension(),
 	new PanelExtension(),
-	new CatalogueExtension(),
+	// new CatalogueExtension(),
 	new EditorExtension(),
-	new FolderTreeExtension(),
-	new ExtendsSparkSQL(),
+	// new FolderTreeExtension(),
+	// new ExtendsSparkSQL(),
 	new MenuExtension(),
 ];

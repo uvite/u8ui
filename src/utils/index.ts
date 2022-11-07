@@ -37,7 +37,7 @@ const history = createBrowserHistory();
 import { updateDrawer } from '@/components/customDrawer';
 import type { languages } from '@dtinsight/molecule/esm/monaco';
 import { Keywords, Snippets } from './completion';
-import { taskRenderService } from '@/services';
+//import { taskRenderService } from '@/services';
 
 /**
  * 返回今日 [00:00:00, 23:59:69]
@@ -65,7 +65,7 @@ export function getCookie(name: string) {
 	return null;
 }
 
-export function deleteCookie(name: string, domain?: string, path: string = '/') {
+export function deleteCookie(name: string, domain?: string, path = '/') {
 	const d = new Date(0);
 	const cookieDomain = domain ? `; domain=${domain}` : '';
 	document.cookie = `${name}=; expires=${d.toUTCString()}${cookieDomain}; path=${path}`;
@@ -373,7 +373,7 @@ export const convertToStr = (values: Record<string, any>, prefix = '') => {
 };
 
 function isUtf8(s: string) {
-	const lastnames = new Array('ä', 'å', 'æ', 'ç', 'è', 'é');
+	const lastnames = ['ä', 'å', 'æ', 'ç', 'è', 'é'];
 	for (let i = 0; i < lastnames.length; i += 1) {
 		if (s && s.indexOf(lastnames[i]) > -1) {
 			return false;
@@ -451,9 +451,9 @@ export const utf8to16 = (str: string) => {
 export function goToTaskDev(record: { id: string | number; [key: string]: any }) {
 	const { id } = record ?? {};
 	// Open task in tab
-	taskRenderService.openTask({ id: id.toString() });
+	//taskRenderService.openTask({ id: id.toString() });
 	// Clear history query
-	history.push({
+	history.push("/",{
 		query: {},
 	});
 	// Close drawer
@@ -670,7 +670,7 @@ export function createSeries(num: number) {
  * getColumnsByColumnsText('id int') // [{field: 'id', type: 'int'}]
  * ```
  */
-export function getColumnsByColumnsText(text: string = '') {
+export function getColumnsByColumnsText(text = '') {
 	const columns: { field: string; type: string }[] = [];
 	const tmpMap: Record<string, boolean> = {};
 	if (text) {

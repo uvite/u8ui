@@ -76,6 +76,7 @@ export default class InitializeExtension implements IExtension {
 	id: UniqueId = 'initialize';
 	name= 'initialize';
 	activate(): void {
+    molecule.activityBar.reset();
 		initializeColorTheme();
 		initializeEntry();
 		//initResourceManager();
@@ -86,11 +87,11 @@ export default class InitializeExtension implements IExtension {
 		molecule.layout.togglePanelVisibility();
 		initMenuBar();
 		initLogin();
-		initExplorer();
+		//initExplorer();
 		initBotsSource();
 		//initDataSource();
 		initLanguage();
-		initExpandCollapse();
+		//initExpandCollapse();
 	}
 	dispose(): void {
 		throw new Error('Method not implemented.');
@@ -101,8 +102,8 @@ export default class InitializeExtension implements IExtension {
  * 设置默认展开的左侧目录树项
  */
 function initExpandCollapse() {
-	const { SAMPLE_FOLDER_PANEL_ID, EDITOR_PANEL_ID } = molecule.builtin.getConstants();
-	molecule.explorer.setExpandedPanels([EDITOR_PANEL_ID!, SAMPLE_FOLDER_PANEL_ID!]);
+	// const { SAMPLE_FOLDER_PANEL_ID, EDITOR_PANEL_ID } = molecule.builtin.getConstants();
+	// molecule.explorer.setExpandedPanels([EDITOR_PANEL_ID!, SAMPLE_FOLDER_PANEL_ID!]);
 }
 
 /**
@@ -149,72 +150,72 @@ function initializeEntry() {
 
 		});
 	};
-
-	// 设置目录树的入口页面
-	molecule.folderTree.setEntry(
-		<div className={classNames('mt-20px', 'text-center', 'text-xs')}>
-			未找到任务开发目录，请先
-			<Button
-				style={{ padding: 0 }}
-				type="link"
-				onClick={() => handleGoto(DRAWER_MENU_ENUM.CLUSTER)}
-			>
-				配置集群
-			</Button>
-			并进行
-			<Button
-				style={{ padding: 0 }}
-				type="link"
-				onClick={() => handleGoto(DRAWER_MENU_ENUM.RESOURCE)}
-			>
-				绑定
-			</Button>
-		</div>,
-	);
-
-	// 设置资源管理的入口页面
-	resourceManagerService.setEntry(
-		<div className={classNames('mt-20px', 'text-center', 'text-xs')}>
-			未找到资源开发目录，请先
-			<Button
-				style={{ padding: 0 }}
-				type="link"
-				onClick={() => handleGoto(DRAWER_MENU_ENUM.CLUSTER)}
-			>
-				配置集群
-			</Button>
-			并进行
-			<Button
-				style={{ padding: 0 }}
-				type="link"
-				onClick={() => handleGoto(DRAWER_MENU_ENUM.RESOURCE)}
-			>
-				绑定
-			</Button>
-		</div>,
-	);
-
-	// 设置函数管理的入口页面
-	functionManagerService.setEntry(
-		<div className={classNames('mt-20px', 'text-center', 'text-xs')}>
-			未找到函数管理目录，请先
-			<Button
-				style={{ padding: 0 }}
-				type="link"
-				onClick={() => handleGoto(DRAWER_MENU_ENUM.CLUSTER)}
-			>
-				配置集群
-			</Button>
-			并进行
-			<Button
-				style={{ padding: 0 }}
-				type="link"
-				onClick={() => handleGoto(DRAWER_MENU_ENUM.RESOURCE)}
-			>
-				绑定
-			</Button>
-		</div>,
-	);
+  //
+	// // 设置目录树的入口页面
+	// molecule.folderTree.setEntry(
+	// 	<div className={classNames('mt-20px', 'text-center', 'text-xs')}>
+	// 		未找到任务开发目录，请先
+	// 		<Button
+	// 			style={{ padding: 0 }}
+	// 			type="link"
+	// 			onClick={() => handleGoto(DRAWER_MENU_ENUM.CLUSTER)}
+	// 		>
+	// 			配置集群
+	// 		</Button>
+	// 		并进行
+	// 		<Button
+	// 			style={{ padding: 0 }}
+	// 			type="link"
+	// 			onClick={() => handleGoto(DRAWER_MENU_ENUM.RESOURCE)}
+	// 		>
+	// 			绑定
+	// 		</Button>
+	// 	</div>,
+	// );
+  //
+	// // 设置资源管理的入口页面
+	// resourceManagerService.setEntry(
+	// 	<div className={classNames('mt-20px', 'text-center', 'text-xs')}>
+	// 		未找到资源开发目录，请先
+	// 		<Button
+	// 			style={{ padding: 0 }}
+	// 			type="link"
+	// 			onClick={() => handleGoto(DRAWER_MENU_ENUM.CLUSTER)}
+	// 		>
+	// 			配置集群
+	// 		</Button>
+	// 		并进行
+	// 		<Button
+	// 			style={{ padding: 0 }}
+	// 			type="link"
+	// 			onClick={() => handleGoto(DRAWER_MENU_ENUM.RESOURCE)}
+	// 		>
+	// 			绑定
+	// 		</Button>
+	// 	</div>,
+	// );
+  //
+	// // 设置函数管理的入口页面
+	// functionManagerService.setEntry(
+	// 	<div className={classNames('mt-20px', 'text-center', 'text-xs')}>
+	// 		未找到函数管理目录，请先
+	// 		<Button
+	// 			style={{ padding: 0 }}
+	// 			type="link"
+	// 			onClick={() => handleGoto(DRAWER_MENU_ENUM.CLUSTER)}
+	// 		>
+	// 			配置集群
+	// 		</Button>
+	// 		并进行
+	// 		<Button
+	// 			style={{ padding: 0 }}
+	// 			type="link"
+	// 			onClick={() => handleGoto(DRAWER_MENU_ENUM.RESOURCE)}
+	// 		>
+	// 			绑定
+	// 		</Button>
+	// 	</div>,
+	// );
 }
 
 
@@ -228,9 +229,9 @@ function initFunctionManager() {
 		name: '策略开发',
 		title: '策略开发',
 	};
-	const { CONTEXT_MENU_SEARCH } = molecule.builtin.getConstants();
-
-	molecule.activityBar.remove([CONTEXT_MENU_SEARCH!]);
+	// const { CONTEXT_MENU_SEARCH } = molecule.builtin.getConstants().;
+  //
+	// molecule.activityBar.remove([CONTEXT_MENU_SEARCH!]);
 
 	const headerToolBar = [
 		{
@@ -310,13 +311,13 @@ function initMenuBar() {
 }
 
 function updateAccountContext(contextMenu: IActivityMenuItemProps[]) {
-	const nextData = molecule.activityBar.getState().data || [];
-	const { ACTIVITY_BAR_GLOBAL_ACCOUNT } = molecule.builtin.getConstants();
-	const target = nextData.find((item) => item.id === ACTIVITY_BAR_GLOBAL_ACCOUNT);
-	if (target) {
-		target.contextMenu = contextMenu;
-	}
-	molecule.activityBar.setState({ data: nextData });
+	// const nextData = molecule.activityBar.getState().data || [];
+	// const { ACTIVITY_BAR_GLOBAL_ACCOUNT } = molecule.builtin.getConstants();
+	// const target = nextData.find((item) => item.id === ACTIVITY_BAR_GLOBAL_ACCOUNT);
+	// if (target) {
+	// 	target.contextMenu = contextMenu;
+	// }
+	// molecule.activityBar.setState({ data: nextData });
 }
 
 /**
@@ -409,19 +410,7 @@ function initLogin() {
  */
 function initExplorer() {
 	// 优化右键菜单
-	const explorerData = molecule.explorer.getState().data?.concat() || [];
-	const { SAMPLE_FOLDER_PANEL_ID } = molecule.builtin.getConstants();
-	const folderTreePane = explorerData.find((item) => item.id === SAMPLE_FOLDER_PANEL_ID);
-	if (folderTreePane?.toolbar) {
-		folderTreePane.toolbar[0].title = '新建任务';
-		molecule.explorer.setState({
-			data: explorerData,
-		});
-	}
 
-	molecule.explorer.onCollapseAllFolders(() => {
-		molecule.folderTree.setExpandKeys([]);
-	});
 }
 
 

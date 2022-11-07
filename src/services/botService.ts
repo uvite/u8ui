@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { IBotProps } from '@/interface';
+import { IBotProps} from '@/interface';
 import { Component } from '@dtinsight/molecule/esm/react';
 import Base64 from 'base-64';
 import api from '@/api';
@@ -45,25 +45,22 @@ export default class DataSourceService
 	}
 
 	private queryDataSource = () => {
-		api.getAllBots({}).then((res) => {
-			if (res.code === 1) {
-				const nextData: IBotProps[] = ((res.data as IBotProps[]) || []).map(
-					(ele) => {
 
+    api.getAllBots({}).then((res) => {
+      if (res.code === 1) {
+        const nextData: IBotProps[] = ((res.data as IBotProps[]) || []).map(
+          (ele) => {
+            return ele
+          },
+        );
 
-						return {
-							...ele,
+        this.setState({
+          dataSource: nextData,
+        });
+      }
+    });
 
-						};
-					},
-				);
-
-				this.setState({
-					dataSource: nextData,
-				});
-			}
-		});
-	};
+ 	};
 
 	getDataSource = () => {
 		return this.state.dataSource || [];

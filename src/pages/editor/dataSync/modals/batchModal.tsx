@@ -68,7 +68,7 @@ export default function BatchModal({
 			onOk={handleSubmit}
 			onCancel={onCancel}
 			maskClosable={false}
-			visible={visible}
+			open={visible}
 		>
 			<div>
 				{isNotHBase ? '批量导入的语法格式（index 从 0 开始）：' : '批量添加的语法格式:'}

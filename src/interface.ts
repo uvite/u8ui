@@ -528,7 +528,28 @@ export interface IDataSourceProps {
 	status: number;
 	linkJson: string | null;
 }
+export interface ITradeProps {
 
+
+  gid: number,
+  id: string,
+  orderID: number,
+  exchange: string,
+  price: number,
+  quantity: number,
+  quoteQuantity: number,
+  symbol: string,
+  side: string,
+  isBuyer: boolean,
+  isMaker: boolean,
+  tradedAt: string,
+  fee: number,
+  feeCurrency: string,
+  isMargin: boolean,
+  isFutures: boolean,
+  isIsolated: boolean,
+
+}
 /**
  * 数据源类型
  */

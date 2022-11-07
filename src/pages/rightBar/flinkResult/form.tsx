@@ -76,7 +76,7 @@ import Editor from '@/components/editor';
 import { NAME_FIELD } from '.';
 import { FormContext } from '@/services/rightBarService';
 import DataPreviewModal from '@/pages/editor/streamCollection/source/dataPreviewModal';
-import { taskRenderService } from '@/services';
+//import { taskRenderService } from '@/services';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -463,11 +463,11 @@ export default function ResultForm({
 						option?.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
 					}
 				>
-					{taskRenderService.getState().supportSourceList.flinkSqlSinks.map((item) => (
-						<Option key={item} value={item}>
-							{DATA_SOURCE_TEXT[item]}
-						</Option>
-					))}
+					{/*{taskRenderService.getState().supportSourceList.flinkSqlSinks.map((item) => (*/}
+					{/*	<Option key={item} value={item}>*/}
+					{/*		{DATA_SOURCE_TEXT[item]}*/}
+					{/*	</Option>*/}
+					{/*))}*/}
 				</Select>
 			</FormItem>
 			<FormItem

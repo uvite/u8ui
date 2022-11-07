@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg height="24" width="24" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <style bx:fonts="Barrio">@import url(https://fonts.googleapis.com/css2?family=Barrio%3Aital%2Cwght%400%2C400&amp;display=swap);</style>
+    <path id="text-path-0" d="M 8.971106446334488 25.633393620859263 Q 19.647361266986536 12.161746826637454 30.323616087638584 25.633393620859263"/>
+    <path id="path-1" d="M 8.971106446334488 25.633393620859263 Q 19.647361266986536 12.161746826637454 30.323616087638584 25.633393620859263"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path d="M40 20c0 11.046-8.954 20-20 20S0 31.046 0 20 8.954 0 20 0s20 8.954 20 20" fill="#DA552F"/>
+  </g>
+  <circle style="fill-rule: nonzero; paint-order: stroke; stroke: rgb(255, 255, 255); fill: none;" cx="30.48" cy="19.369" r="9.552" transform="matrix(1.030751, 0, 0, 1.023477, -1.872411, -0.284378)"/>
+  <text style="fill: rgb(255, 255, 255); font-family: Barrio; font-size: 15.31px; white-space: pre;" transform="matrix(0.77534, 0.631544, -0.631544, 0.77534, 15.153933, 2.103355)"><textPath xlink:href="#text-path-0">u</textPath></text>
+  <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 1.6px;" x="48.591" y="18.684">Enter your text here</text>
+  <circle style="fill-rule: nonzero; paint-order: stroke; stroke: rgb(255, 255, 255); fill: none;" cx="30.48" cy="19.369" r="9.552" transform="matrix(1.030751, 0, 0, 1.023477, -20.986906, 0.1109)"/>
+  <text style="fill: rgb(255, 255, 255); font-family: Barrio; font-size: 15.31px; white-space: pre;" transform="matrix(0.77534, 0.631544, -0.631544, 0.77534, 33.957973, 1.803455)"><textPath xlink:href="#path-1">u</textPath></text>
+</svg>

@@ -217,7 +217,7 @@ export function DetailInfoModal({
 	return (
 		<Modal
 			title={title}
-			visible={visible}
+			open={visible}
 			onCancel={onCancel}
 			width={550}
 			footer={

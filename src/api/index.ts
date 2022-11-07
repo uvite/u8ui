@@ -6,7 +6,7 @@ export default {
 
   //获取资产列表
   getAllAsset(params: any) {
-    return http.get(req.GET_ALLASSEST, params);
+    return http.get(req.GET_ALLCOINS, params);
   },
   //获取机器人
   getAllBots(params: any) {
@@ -14,11 +14,15 @@ export default {
   },
 
   getTrade(params: any){
-    return http.get(`${publicUrl}/api/trades`,params);
+    return http.get(req.GET_TRADES, params);
+
+    //return http.get(`${publicUrl}/api/trades`,params);
   },
   getReport(params: any){
+    return http.get(req.GET_REPORT, params);
+
     // api/sessions/binance/pnl?exchange=binance&symbol=ETHUSDT
-    return http.get(`${publicUrl}/api/report`,params);
+    //return http.get(`${publicUrl}/api/report`,params);
 
   },
 

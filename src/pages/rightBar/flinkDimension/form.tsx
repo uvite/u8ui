@@ -51,7 +51,7 @@ import type { IDataColumnsProps, IDataSourceUsedInSyncProps, IFlinkSideProps } f
 import { createSeries } from '@/utils';
 import { NAME_FIELD } from '.';
 import { FormContext } from '@/services/rightBarService';
-import { taskRenderService } from '@/services';
+//import { taskRenderService } from '@/services';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -324,11 +324,11 @@ export default function DimensionForm({
 						option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
 					}
 				>
-					{taskRenderService.getState().supportSourceList.flinkSqlSides.map((v) => (
-						<Option value={v} key={v}>
-							{DATA_SOURCE_TEXT[v]}
-						</Option>
-					))}
+					{/*{taskRenderService.getState().supportSourceList.flinkSqlSides.map((v) => (*/}
+					{/*	<Option value={v} key={v}>*/}
+					{/*		{DATA_SOURCE_TEXT[v]}*/}
+					{/*	</Option>*/}
+					{/*))}*/}
 				</Select>
 			</FormItem>
 			<FormItem

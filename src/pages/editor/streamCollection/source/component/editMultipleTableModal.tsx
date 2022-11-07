@@ -35,7 +35,7 @@ class EditMultipleTableModal extends React.Component<any, any> {
         return (
             <Modal
                 width={520}
-                visible={visible}
+                open={visible}
                 title='编辑分组表'
                 onCancel={onCancel}
                 onOk={() => {

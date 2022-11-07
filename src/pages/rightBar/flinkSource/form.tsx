@@ -52,7 +52,7 @@ import { FormContext } from '@/services/rightBarService';
 import { CustomParams } from '../customParams';
 import DataPreviewModal from '../../editor/streamCollection/source/dataPreviewModal';
 import taskSaveService from '@/services/taskSaveService';
-import { taskRenderService } from '@/services';
+//import { taskRenderService } from '@/services';
 
 const FormItem = Form.Item;
 const { Option } = Select;

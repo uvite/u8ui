@@ -89,7 +89,7 @@ const DataSourceView = ({ dataSource }: IDataSourceState) => {
 		switch (menu.id) {
 			case 'open':
         //history.push("/kline", { record: record });
-        history.push("/kline?the=query", { some: "state" });
+        history.push("/?the=query", { some: "state" });
 
 					molecule.editor.open({
 						id: record.name,

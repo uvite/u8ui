@@ -108,7 +108,7 @@ export default ({
 	return (
 		<Modal
 			title={title}
-			visible={visible}
+			open={visible}
 			onOk={() => getServiceParam()}
 			onCancel={handleCancel}
 			destroyOnClose

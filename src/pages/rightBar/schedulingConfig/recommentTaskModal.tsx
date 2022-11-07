@@ -87,7 +87,7 @@ export default function RecommendTaskModal({
 		<Modal
 			title="推荐上游依赖"
 			maskClosable={false}
-			visible={visible}
+			open={visible}
 			onCancel={handleCancel}
 			onOk={handleOk}
 			okText="确定"

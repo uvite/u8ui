@@ -52,7 +52,7 @@ export default function ConstModal({ visible, onOk, onCancel }: IConstModalProps
 			title="添加常量"
 			onOk={handleSubmit}
 			onCancel={onCancel}
-			visible={visible}
+			open={visible}
 			destroyOnClose
 		>
 			<Form

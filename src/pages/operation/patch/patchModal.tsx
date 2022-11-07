@@ -392,7 +392,7 @@ export default ({ visible, task, handCancel }: IPatchDataProps) => {
 		<Modal
 			title="补数据"
 			okText="运行选中任务"
-			visible={visible}
+			open={visible}
 			width={650}
 			onOk={addData}
 			onCancel={cancleModal}

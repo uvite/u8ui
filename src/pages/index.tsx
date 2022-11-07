@@ -43,7 +43,7 @@ import ResourceManage from './console/resource';
 import ClusterManage from './console/cluster';
 import ClusterDetail from './console/cluster/detail';
 import { getCookie } from '@/utils';
-import { taskRenderService } from '@/services';
+// import { taskRenderService } from '@/services';
 import { connect } from '@dtinsight/molecule/esm/react';
 import type { ITaskRenderState } from '@/services/taskRenderService';
 import '@dtinsight/molecule/esm/style/mo.css';
@@ -55,13 +55,15 @@ const moInstance = create({
 });
 
 moInstance.onBeforeInit(() => {
-	molecule.builtin.inactiveModule('builtInOutputPanel');
-	molecule.builtin.inactiveModule('FOLDER_PANEL_CONTEXT_MENU');
+	//molecule.builtin.inactiveModule('builtInOutputPanel');
+  //molecule.activityBar.remove('sidebar.explore.title');
+ // molecule.activityBar.remove('sidebar.search.title');
+	//molecule.builtin.inactiveModule('FOLDER_PANEL_CONTEXT_MENU');
 });
 
 const MoleculeProvider = () => moInstance.render(<Workbench />);
 
-export default connect(taskRenderService, ({ supportTaskList }: ITaskRenderState) => {
+export default  ( ) => {
 	const [personList, setPersonList] = useState<IPersonLists[]>([]);
 	const [username, setUsername] = useState<string | undefined>(undefined);
 
@@ -193,7 +195,7 @@ export default connect(taskRenderService, ({ supportTaskList }: ITaskRenderState
 							<Breadcrumb.Item>
 								<a
 									onClick={() => {
-										history.push({
+										history.push("/",{
 											query: {
 												drawer: DRAWER_MENU_ENUM.QUEUE,
 											},
@@ -227,7 +229,7 @@ export default connect(taskRenderService, ({ supportTaskList }: ITaskRenderState
 							<Breadcrumb.Item>
 								<a
 									onClick={() => {
-										history.push({
+										history.push("/",{
 											query: {
 												drawer: DRAWER_MENU_ENUM.CLUSTER,
 											},
@@ -287,16 +289,11 @@ export default connect(taskRenderService, ({ supportTaskList }: ITaskRenderState
 	}, []);
 
 	return (
-		<Context.Provider
-			value={{
-				personList,
-				username,
-				supportJobTypes: supportTaskList,
-			}}
-		>
+		<>
 			<MoleculeProvider />
-			<Login />
-			<CustomDrawer id="root" renderContent={() => null} />
-		</Context.Provider>
+
+		</>
+
+
 	);
-});
+};

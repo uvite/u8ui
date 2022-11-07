@@ -121,7 +121,7 @@ export default function FnModal({
 	return (
 		<Modal
 			title={`${isEdit ? '编辑' : '新建'}自定义函数`}
-			visible={visible}
+			open={visible}
 			destroyOnClose
 			onCancel={onClose}
 			onOk={handleSubmit}

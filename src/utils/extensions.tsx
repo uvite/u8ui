@@ -23,7 +23,7 @@ import type { RESOURCE_TYPE } from '@/constant';
 import { ID_COLLECTIONS } from '@/constant';
 import { CATALOGUE_TYPE, TASK_TYPE_ENUM } from '@/constant';
 import type { CatalogueDataProps, IOfflineTaskProps } from '@/interface';
-import { executeService, taskRenderService } from '@/services';
+import { executeService } from '@/services';
 import taskResultService, { createLog } from '@/services/taskResultService';
 import Result from '@/components/task/result';
 import { filterSql } from '.';
@@ -41,7 +41,8 @@ export function fileIcon(
 ): string | JSX.Element {
 	switch (source) {
 		case CATALOGUE_TYPE.TASK: {
-			return taskRenderService.renderTaskIcon(type as TASK_TYPE_ENUM);
+      return
+			//return taskRenderService.renderTaskIcon(type as TASK_TYPE_ENUM);
 		}
 		case CATALOGUE_TYPE.RESOURCE: {
 			return <ResourceIcon style={{ color: '#0065f6' }} />;

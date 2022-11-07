@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { IAessetProps } from '@/interface';
+import {IAessetProps, IBotProps} from '@/interface';
 import { Component } from '@dtinsight/molecule/esm/react';
 import Base64 from 'base-64';
 import api from '@/api';
@@ -45,25 +45,21 @@ export default class DataSourceService
 	}
 
 	private queryDataSource = () => {
-		api.getAllAsset({}).then((res) => {
-			if (res.code === 1) {
-				const nextData: IAessetProps[] = ((res.data as IAessetProps[]) || []).map(
-					(ele) => {
 
+    api.getAllAsset({}).then((res) => {
+      if (res.code === 1) {
+        const nextData: IAessetProps[] = ((res.data as IAessetProps[]) || []).map(
+          (ele) => {
+            return ele
+          },
+        );
 
-						return {
-							...ele,
-
-						};
-					},
-				);
-
-				this.setState({
-					dataSource: nextData,
-				});
-			}
-		});
-	};
+        this.setState({
+          dataSource: nextData,
+        });
+      }
+    });
+ 	};
 
 	getDataSource = () => {
 		return this.state.dataSource || [];

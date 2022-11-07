@@ -539,7 +539,7 @@ export default function SideBar({
 			<Modal
 				width={800}
 				title="错误信息"
-				visible={errorMessage.visible}
+				open={errorMessage.visible}
 				onCancel={() => setErrorMessage({ visible: false, message: '' })}
 				footer={null}
 				maskClosable={true}

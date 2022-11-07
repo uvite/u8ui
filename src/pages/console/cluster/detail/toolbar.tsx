@@ -77,7 +77,7 @@ export default function Toolbar({ current, disabled, onConnection, onSave }: ITo
 			<Modal
 				width={800}
 				title="错误信息"
-				visible={visible}
+				open={visible}
 				onCancel={() => setVisible(false)}
 				footer={null}
 				maskClosable={true}

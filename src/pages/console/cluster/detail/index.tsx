@@ -10,7 +10,7 @@ import context from '@/context/cluster';
 import Toolbar from './toolbar';
 import SideBar, { ComponentScheduleKind } from './sideBar';
 import notification from '@/components/notification';
-import { taskRenderService } from '@/services';
+// import { taskRenderService } from '@/services';
 import type { RcFile } from 'antd/lib/upload';
 import type { ILayoutData, ITemplateData } from './detail';
 import type { COMPONENT_TYPE_VALUE } from '@/constant';
@@ -460,7 +460,7 @@ export default function ClusterDetail() {
 
 				// 如果是计算组件的变更，会引起当前应用支持的任务类型的变动
 				if (currentComponentOwner === ComponentScheduleKind.Compute) {
-					taskRenderService.getTaskTypes(true);
+					//taskRenderService.getTaskTypes(true);
 				}
 			}
 		} finally {

@@ -2,8 +2,10 @@ export const BASE_URI = '/api';
 
 export default {
 
-  GET_ALLASSEST: `${BASE_URI}/assest`, // 获取全部数据源
+  GET_ALLCOINS: `${BASE_URI}/coins`, // 获取全部数据源
   GET_ALLBOTS: `${BASE_URI}/bots`, // 获取全部数据源
+  GET_TRADES: `${BASE_URI}/trades`, // 获取全部数据源
+  GET_REPORT: `${BASE_URI}/report`, // 获取全部数据源
 
 
 
